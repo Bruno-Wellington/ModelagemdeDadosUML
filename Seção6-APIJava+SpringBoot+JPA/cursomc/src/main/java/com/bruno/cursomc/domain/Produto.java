@@ -9,65 +9,80 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 
-
 @Entity
-public class Categoria implements Serializable {
+public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+	private Double preco;
 	
-	@ManyToMany(mappedBy="categorias")
-	private List<Produto> produtos = new ArrayList<>();
+	@ManyToMany
+	@JoinTable(name="PRODUTO_CATEGORIA",//tabela que associa protudo-categoria
+			   joinColumns = @JoinColumn(name="produto_id"),//chave estrangeira da tabela produto
+		       inverseJoinColumns = @JoinColumn(name="categoria_id")//chave estrangeira da tabela categoria
+	)
+	private List<Categoria> categorias = new ArrayList<>();
 	
-	//Construtor vazio
-	public Categoria() {
+	public Produto() {
 	}
 
-	//Construtor
-	public Categoria(Integer id, String nome) {
+	public Produto(Integer id, String nome, Double preco) {
 		super();
 		this.id = id;
 		this.nome = nome;
+		this.preco = preco;
 	}
 
-	//Get e Set id
+	//get e set id
 	public Integer getId() {
 		return id;
 	}
-	
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	//Get e Set nome
+	//get e set nome
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	//Get e Set Produtos
-	public List<Produto> getProdutos() {
-		return produtos;
+
+	//get e set preco
+	public Double getPreco() {
+		return preco;
 	}
 
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
+	public void setPreco(Double preco) {
+		this.preco = preco;
 	}
-	
-	//metodo hashCode
+
+	//get e set categorias
+	public List<Categoria> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<Categoria> categorias) {
+		this.categorias = categorias;
+	}
+
+	//hashCode
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
 
-	//metodo equals
+	//equals
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -76,9 +91,9 @@ public class Categoria implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Categoria other = (Categoria) obj;
+		Produto other = (Produto) obj;
 		return Objects.equals(id, other.id);
 	}
-
-
+	
+	
 }
