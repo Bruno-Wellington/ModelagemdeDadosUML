@@ -9,19 +9,33 @@ import java.util.Set;
 
 import com.bruno.cursomc.domain.enums.TipoCliente;
 
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+@Entity
 public class Cliente implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private String email;
-	private String cpfouCnpj;
+	private String cpfOuCnpj;
 	private Integer tipo;
 
 	//Relação 1 x 1* na tabela cliente
+	@OneToMany(mappedBy="cliente")//mapeado na tabela endereço na variavel cliente
 	private List<Endereco> enderecos = new ArrayList<>();
 	
 	//relação 1* telefones usando HashSet
+	@ElementCollection
+	@CollectionTable(name="TELEFONE")
 	private Set<String> telefones = new HashSet<>();
 	
 	//Construtor
@@ -29,12 +43,12 @@ public class Cliente implements Serializable {
 	}
 	
 	//Construtor
-	public Cliente(Integer id, String nome, String email, String cpfouCnpj, TipoCliente tipo) {
+	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipo) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
-		this.cpfouCnpj = cpfouCnpj;
+		this.cpfOuCnpj = cpfOuCnpj;
 		this.tipo = tipo.getCod();
 	}
 
@@ -62,12 +76,12 @@ public class Cliente implements Serializable {
 		this.email = email;
 	}
 
-	public String getCpfouCnpj() {
-		return cpfouCnpj;
+	public String getCpfOuCnpj() {
+		return cpfOuCnpj;
 	}
 
-	public void setCpfouCnpj(String cpfouCnpj) {
-		this.cpfouCnpj = cpfouCnpj;
+	public void setCpfOuCnpj(String cpfOuCnpj) {
+		this.cpfOuCnpj = cpfOuCnpj;
 	}
 
 	//get e set tipo
