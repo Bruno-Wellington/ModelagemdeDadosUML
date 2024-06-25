@@ -8,6 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import com.bruno.cursomc.domain.enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.ElementCollection;
@@ -30,6 +31,7 @@ public class Cliente implements Serializable {
 	private Integer tipo;
 
 	//Relação 1 x 1* na tabela cliente
+	@JsonManagedReference //Libera a serealização dos endereços
 	@OneToMany(mappedBy="cliente")//mapeado na tabela endereço na variavel cliente
 	private List<Endereco> enderecos = new ArrayList<>();
 	
