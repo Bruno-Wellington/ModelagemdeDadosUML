@@ -25,7 +25,7 @@ public class Cidade implements Serializable {
 	//Uma cidade tem um estado, entao estanciamos dessa forma abaixo
 	@JsonManagedReference
 	@ManyToOne
-	@JoinColumn(name="estado_id")
+	@JoinColumn(name="estado_id")//Nome da chave extrangeira
 	private Estado estado;
 	
 	//construtor vazio

@@ -4,6 +4,9 @@ import java.util.Objects;
 
 import com.bruno.cursomc.domain.enums.EstadoPagamento;
 
+import jakarta.persistence.Entity;
+
+@Entity
 public class PagamentoComCartao extends Pagamento {
 	private static final long serialVersionUID = 1L;//nao precisa implementar o Serializable pois a classe ja herda da classe pagamento
 

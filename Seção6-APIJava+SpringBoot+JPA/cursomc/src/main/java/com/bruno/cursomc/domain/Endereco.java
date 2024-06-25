@@ -28,11 +28,11 @@ public class Endereco implements Serializable {
 	//Relação 1 x 1* na tabela endereco
 	@JsonBackReference //Indica que o endereço nao pode serealizar o cliente
 	@ManyToOne
-	@JoinColumn(name="cliente_id")
+	@JoinColumn(name="cliente_id")//Nome da chave extrangeira
 	private Cliente cliente;
 	
 	@ManyToOne
-	@JoinColumn(name="cidade_id")
+	@JoinColumn(name="cidade_id")//Nome da chave extrangeira
 	private Cidade cidade;
 	
 	//Construtor
