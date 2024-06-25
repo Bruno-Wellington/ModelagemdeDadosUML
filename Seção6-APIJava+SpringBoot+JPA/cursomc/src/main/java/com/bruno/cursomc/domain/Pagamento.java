@@ -5,12 +5,23 @@ import java.util.Objects;
 
 import com.bruno.cursomc.domain.enums.EstadoPagamento;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToOne;
+
+@Entity
 public class Pagamento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	@Id
 	private Integer id;
 	private EstadoPagamento estado;
 	
+	@OneToOne
+	@JoinColumn(name="pedido_id")
+	@MapsId //Garante que o id do Pagamento seja o mesmo do pedido
 	private Pedido pedido;
 	
 	//Construtor
