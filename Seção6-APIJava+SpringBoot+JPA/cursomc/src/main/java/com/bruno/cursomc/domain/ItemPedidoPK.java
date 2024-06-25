@@ -8,7 +8,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Embeddable
-public class ItemPedidoPK implements Serializable {
+public class ItemPedidoPK implements Serializable {//Essa é uma classe auxiliar da classe ItemPedido
 	private static final long serialVersionUID = 1L;
 	
 	@ManyToOne

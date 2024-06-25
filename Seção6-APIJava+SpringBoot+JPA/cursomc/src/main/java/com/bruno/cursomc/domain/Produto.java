@@ -16,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Produto implements Serializable {
@@ -35,7 +36,8 @@ public class Produto implements Serializable {
 	)
 	private List<Categoria> categorias = new ArrayList<>();
 	
-	private Set<ItemPedido> itens = new HashSet<>();
+	@OneToMany(mappedBy ="id.produto")
+	private Set<ItemPedido> itens = new HashSet<>();//coleção
 	
 	public Produto() {
 	}
