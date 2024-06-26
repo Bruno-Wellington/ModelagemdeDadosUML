@@ -3,8 +3,6 @@ package com.bruno.cursomc.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -22,8 +20,6 @@ public class Cidade implements Serializable {
 	private String nome;
 	
 	//relação 1 x * no lado da cidade
-	//Uma cidade tem um estado, entao estanciamos dessa forma abaixo
-	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name="estado_id")//Nome da chave extrangeira
 	private Estado estado;

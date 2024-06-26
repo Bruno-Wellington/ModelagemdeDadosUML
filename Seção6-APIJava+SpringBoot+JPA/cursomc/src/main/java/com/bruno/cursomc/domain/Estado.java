@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,8 +23,7 @@ public class Estado implements Serializable {
 	private String nome;
 	
 	//relação 1 x * no lado do estado
-	//1 estado tem varias cidades, logo teremos uma lista de cidades, entao estanciamos dessa forma abaixo
-	@JsonBackReference
+	@JsonIgnore
 	@OneToMany(mappedBy="estado")//Mapeamento do atributo estado da tabela cidade
 	private List<Cidade> cidades = new ArrayList<>();
 	

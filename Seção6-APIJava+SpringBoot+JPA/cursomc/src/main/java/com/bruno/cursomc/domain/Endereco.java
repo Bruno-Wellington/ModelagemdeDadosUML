@@ -3,7 +3,7 @@ package com.bruno.cursomc.domain;
 import java.io.Serializable;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +26,7 @@ public class Endereco implements Serializable {
 	private String cep;
 	
 	//Relação 1 x 1* na tabela endereco
-	@JsonBackReference //Indica que o endereço nao pode serealizar o cliente
+	@JsonIgnore //Indica que o endereço nao pode serealizar o cliente
 	@ManyToOne
 	@JoinColumn(name="cliente_id")//Nome da chave extrangeira
 	private Cliente cliente;
