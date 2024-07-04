@@ -9,6 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Usuario implements Serializable {
@@ -21,6 +22,9 @@ public class Usuario implements Serializable {
 	private String cpf;
 	private String telefone;
 	private String email;
+	
+	@OneToMany(mappedBy="usuario")
+	private List<Emprestimo> emprestimos = new ArrayList<>();
 	
 	public Usuario() {
 	}
@@ -74,6 +78,14 @@ public class Usuario implements Serializable {
 		this.email = email;
 	}
 
+	public List<Emprestimo> getEmprestimos() {
+		return emprestimos;
+	}
+
+	public void setEmprestimos(List<Emprestimo> emprestimos) {
+		this.emprestimos = emprestimos;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -90,6 +102,5 @@ public class Usuario implements Serializable {
 		Usuario other = (Usuario) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
+
 }
