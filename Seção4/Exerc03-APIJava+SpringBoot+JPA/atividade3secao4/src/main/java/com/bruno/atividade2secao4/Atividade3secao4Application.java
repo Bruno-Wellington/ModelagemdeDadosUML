@@ -8,9 +8,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.bruno.atividade2secao4.domain.Colecao;
 import com.bruno.atividade2secao4.domain.Emprestimo;
+import com.bruno.atividade2secao4.domain.Livro;
 import com.bruno.atividade2secao4.domain.Usuario;
+import com.bruno.atividade2secao4.repositories.ColecaoRepository;
 import com.bruno.atividade2secao4.repositories.EmprestimoRepository;
+import com.bruno.atividade2secao4.repositories.LivroRepository;
 import com.bruno.atividade2secao4.repositories.UsuarioRepository;
 
 @SpringBootApplication
@@ -20,6 +24,10 @@ public class Atividade3secao4Application implements CommandLineRunner {
 	private UsuarioRepository usuarioRepository;
 	@Autowired
 	private EmprestimoRepository emprestimoRepository;
+	@Autowired
+	private ColecaoRepository colecaoRepository;
+	@Autowired
+	private LivroRepository livroRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Atividade3secao4Application.class, args);
@@ -38,6 +46,18 @@ public class Atividade3secao4Application implements CommandLineRunner {
 		
 		usuarioRepository.saveAll(Arrays.asList(u1));
 		emprestimoRepository.saveAll(Arrays.asList(e1, e2));
+		
+		
+		Colecao c1 = new Colecao(null, "Java oficial");
+		
+		Livro l1 = new Livro(null, "Java Core", 320, 2.00,c1);
+		Livro l2 = new Livro(null, "Python Core", 150, 3.00, null);
+		Livro l3 = new Livro(null, "Deadpool", 200, 2.50, null);
+		
+		c1.getLivros().addAll(Arrays.asList(l1));
+		
+		colecaoRepository.saveAll(Arrays.asList(c1));
+		livroRepository.saveAll(Arrays.asList(l1, l2, l3));
 	}
 
 }
