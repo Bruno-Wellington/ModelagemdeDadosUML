@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -20,7 +21,11 @@ public class Emprestimo implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@JsonFormat(pattern="dd/MM/yyy")
 	private Date dataEmprestimo;
+	
+	@JsonFormat(pattern="dd/MM/yyy")
 	private Date dataDevolucao;
 	
 	@JsonIgnore
@@ -28,15 +33,20 @@ public class Emprestimo implements Serializable {
 	@JoinColumn(name="usuario_id")
 	private Usuario usuario;
 	
+	@ManyToOne
+	@JoinColumn(name="livro_id")
+	private Livro livro;
+
 	public Emprestimo() {
 	}
 
-	public Emprestimo(Integer id, Date dataEmprestimo, Date dataDevolucao, Usuario usuario) {
+	public Emprestimo(Integer id, Date dataEmprestimo, Date dataDevolucao, Usuario usuario, Livro livro) {
 		super();
 		this.id = id;
 		this.dataEmprestimo = dataEmprestimo;
 		this.dataDevolucao = dataDevolucao;
-		this.setUsuario(usuario);
+		this.usuario = usuario;
+		this.livro = livro;
 	}
 
 	public Integer getId() {
@@ -69,6 +79,14 @@ public class Emprestimo implements Serializable {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+	
+	public Livro getLivro() {
+		return livro;
+	}
+
+	public void setLivro(Livro livro) {
+		this.livro = livro;
 	}
 	
 	@Override

@@ -14,7 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Colecao implements Serializable {
+public class Genero implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -23,13 +23,13 @@ public class Colecao implements Serializable {
 	private String nome;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "colecao")
+	@OneToMany(mappedBy = "genero")
 	private List<Livro> livros = new ArrayList<>();
-	
-	public Colecao() {
-	}
 
-	public Colecao(Integer id, String nome) {
+	public Genero() {
+	}
+	
+	public Genero(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
@@ -74,9 +74,8 @@ public class Colecao implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Colecao other = (Colecao) obj;
+		Genero other = (Genero) obj;
 		return Objects.equals(id, other.id);
 	}
-	
 	
 }
